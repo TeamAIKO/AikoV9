@@ -1641,7 +1641,6 @@ MonoBehaviour:
   v: 50
   player: {fileID: 1751672796}
   tilePrefab: {fileID: 101442, guid: 82ebf0a7779ae450a8b5d50b179b085c, type: 2}
-  tiles: []
 --- !u!4 &366425103
 Transform:
   m_ObjectHideFlags: 0
@@ -2280,6 +2279,10 @@ Prefab:
     - target: {fileID: 100000, guid: e5ad0ca41a019504d9dc43b6a85ca36a, type: 3}
       propertyPath: m_Name
       value: mainroad_unwrapped 2 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e5ad0ca41a019504d9dc43b6a85ca36a, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e5ad0ca41a019504d9dc43b6a85ca36a, type: 3}
@@ -8317,6 +8320,9 @@ MonoBehaviour:
   pathConfirmed: 0
   isRunning: 0
   animator: {fileID: 118896875}
+  PlayerMPleft: 5
+  rayLength: 5
+  hitTile: 0
 --- !u!114 &1751672799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8654,6 +8660,22 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1759415021}
   m_Mesh: {fileID: 4300002, guid: 9e6570de5a539e44d9dc9bf083fcac7a, type: 3}
+--- !u!1 &1768856960 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: e5ad0ca41a019504d9dc43b6a85ca36a, type: 3}
+  m_PrefabInternal: {fileID: 468313108}
+--- !u!64 &1768856965
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1768856960}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: e5ad0ca41a019504d9dc43b6a85ca36a, type: 3}
 --- !u!1001 &1771304681
 Prefab:
   m_ObjectHideFlags: 0

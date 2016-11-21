@@ -10,7 +10,7 @@ public class GridMaker : MonoBehaviour
 
 	public GameObject tilePrefab;
 	private Camera mainCamera;
-	public List<Transform> tiles = new List<Transform>();
+	public static List<Transform> tiles = new List<Transform>();
 
 	private Transform tileTr;
 	private AStarPathfinder path;
@@ -200,6 +200,7 @@ public class GridMaker : MonoBehaviour
 		path.end = hit.transform.gameObject.GetComponent<Tile>();
 
 		path.Search();
+
 
 		player.gameObject.GetComponent<PlayerController>().SetPath(path.myPath);
 	}
