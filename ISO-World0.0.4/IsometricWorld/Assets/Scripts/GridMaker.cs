@@ -75,12 +75,22 @@ public class GridMaker : MonoBehaviour
 
                     if(LayerMask.LayerToName(hit.transform.gameObject.layer) == "Walkable")
                     {
-                        tiles.Add(tile.transform);
+                     tiles.Add(tile.transform);
                     }
-                    else
+                     else
                     {
                         Destroy(tile.gameObject);
                     }
+
+                    //if(hit.transform.localScale.y != 0.25f)
+
+                    //{
+                      //  Destroy(tile.gameObject);
+                    //}
+					//else
+					//{
+                      //  tiles.Add(tile.transform);
+                    //}
 
                     /*
 					if(hit.transform.localScale.y != 0.25f)
@@ -92,7 +102,7 @@ public class GridMaker : MonoBehaviour
 						tiles.Add(tile.transform);
 					}
                     */
-				}
+                }
 			}
 		}
 	}
