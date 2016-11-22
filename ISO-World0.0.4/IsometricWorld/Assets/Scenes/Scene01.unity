@@ -1667,6 +1667,7 @@ GameObject:
   - 4: {fileID: 366425103}
   - 114: {fileID: 366425102}
   - 114: {fileID: 366425104}
+  - 114: {fileID: 366425105}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -1720,6 +1721,21 @@ MonoBehaviour:
   openList: []
   closeList: []
   myPath: []
+--- !u!114 &366425105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 366425101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f954d0a31301feb4f8d161c29f63348a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalHorizontalTiles: 10
+  totalVerticalTiles: 10
+  bakingStep: 4
+  tilePrefab: {fileID: 101442, guid: 82ebf0a7779ae450a8b5d50b179b085c, type: 2}
 --- !u!1001 &373416272
 Prefab:
   m_ObjectHideFlags: 0
