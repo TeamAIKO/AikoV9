@@ -82,7 +82,7 @@ public class TurnBased : MonoBehaviour
                     currentState = GameStates.EndTurn;
                     PlayerCanMove = false;
                     
-
+                    
                 }
 
                 else if (MovesMade == pathLength)
@@ -96,6 +96,8 @@ public class TurnBased : MonoBehaviour
                 //when the player has run out of turn goes to end turn then staight to enemy turn 
                 Debug.Log("End Turn");
                 PlayerCanMove = false;
+                this.gameObject.GetComponent<PlayerController>().animator.SetBool("run", false);
+
                 PlayerController.instance.pathConfirmed = false;
 
 
