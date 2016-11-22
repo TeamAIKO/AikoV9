@@ -14,6 +14,12 @@ public class AStarPathfinder : MonoBehaviour
 
 	public List<Tile> myPath;
 
+    public static AStarPathfinder instance;
+
+    public void Start()
+    {
+        instance = this;
+    }
 	public void Search()
 	{
 		Tile node = start;
