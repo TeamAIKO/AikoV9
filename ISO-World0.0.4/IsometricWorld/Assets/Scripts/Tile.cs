@@ -9,6 +9,7 @@ public class Tile : MonoBehaviour
 	public float f = 0;
 	public float g = 0;
 	public float h = 0;
+    public bool walkable = true;
 	public Tile parentNode;
 	public GameObject go;
 	public List<Tile> adjacentNodes = new List<Tile>();

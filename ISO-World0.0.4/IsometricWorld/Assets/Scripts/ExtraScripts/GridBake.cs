@@ -32,8 +32,8 @@ public class GridBake : MonoBehaviour
 
 					if(hit.transform.localScale.y != 0.25f)
 					{
-                        //sort this bit out
-						//tile.GetComponent<Tile>().walkable = false;
+                        
+						tile.GetComponent<Tile>().walkable = false;
 						DestroyImmediate(tile.gameObject);
 					}
 					else

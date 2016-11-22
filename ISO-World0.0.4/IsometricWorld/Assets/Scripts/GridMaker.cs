@@ -12,9 +12,12 @@ public class GridMaker : MonoBehaviour
 	private Camera mainCamera;
 	public static List<Transform> tiles = new List<Transform>();
 
+    
 	private Transform tileTr;
+    private Transform currTileTr;
 	private AStarPathfinder path;
 
+    private static GridMaker instance;
     //counting the number of trigger colliders that the player has passed through in order to get the number of moves they have made/remain.
     //public int NumberOfMoves = 0;
     //public int MovesLeft;
@@ -22,7 +25,23 @@ public class GridMaker : MonoBehaviour
     //getting the player so that you can detect when it hits a trigger collider
     //public GameObject Player;
     //public Collider PlayerCollider;
-	public void Start()
+
+    public void Awake()
+    {
+        if (instance != null)
+        {
+            DestroyImmediate(instance);
+            return;
+        }
+        instance = this;
+    }
+
+    public static GridMaker Instance
+    {
+        get { return instance; }
+    }
+
+    public void Start()
 	{
 		mainCamera = Camera.main;
 		path = this.GetComponent<AStarPathfinder>();
