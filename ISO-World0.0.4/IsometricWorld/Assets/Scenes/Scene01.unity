@@ -2861,7 +2861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f334481ab2d9342f0940a30174a3024e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grid: {fileID: 0}
+  grid: {fileID: 366425102}
   tiles: []
   start: {fileID: 0}
   end: {fileID: 0}
@@ -2883,7 +2883,7 @@ MonoBehaviour:
   - {fileID: 453573428}
   - {fileID: 583944261}
   currWaypoint: 0
-  currentState: 0
+  currentState: 1
   path: []
   loopPath: 1
 --- !u!23 &585572589

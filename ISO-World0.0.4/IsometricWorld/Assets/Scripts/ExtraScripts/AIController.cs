@@ -54,23 +54,32 @@ public class AIController : MonoBehaviour
 				return;
 			}
 
+            //vector to new tile
 			Vector3 toTarget = path[curr].gameObject.transform.position - this.transform.position;
+            //calculate rotation looking to destiny
 			Quaternion rot = Quaternion.LookRotation(new Vector3(toTarget.x, 0, toTarget.z));
+            //apply rotation to this transform
 			transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * 10.0f);
 
-//			transform.Translate(Vector3.forward * Time.deltaTime * 1.5f);
+            //move this transform to tile destination
+            //this needs to change animator speed instead if using mecanim root control
+			transform.Translate(Vector3.forward * Time.deltaTime * 1.5f);
 			//animator.SetFloat("Speed", 2.0f);
 
+            //get the tile from the path that we are currently heading
 			Vector3 target = path[curr].gameObject.transform.position;
+            //if we are close enough to the current tile, move to the next one
 			if(Vector3.Distance(transform.position, new Vector3(target.x, transform.position.y, target.z)) < 0.1f)
 			{
 				curr++;
 			}
 
+            //calculate distance to the next waypoint
 			Transform wpTr = waypoints[currWaypoint].gameObject.GetComponent<Waypoint>().tile.gameObject.transform;
 			Vector3 wp = new Vector3(wpTr.position.x, this.transform.position.y, wpTr.position.z);
 			float distToCurrWaypoint = Vector3.Distance(this.transform.position, wp);
 
+            //if distance to waypoint is close enough, either stop or move to first again if we are looping
 			if(distToCurrWaypoint < 0.2f)
 			{
 				if(currWaypoint < waypoints.Length-1)
