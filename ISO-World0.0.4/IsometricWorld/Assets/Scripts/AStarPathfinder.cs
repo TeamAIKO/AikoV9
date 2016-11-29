@@ -6,6 +6,7 @@ public class AStarPathfinder : MonoBehaviour
 {
 	public GridMaker grid;
 	public List<Tile> tiles;
+
 	public Tile start;
 	public Tile end;
 

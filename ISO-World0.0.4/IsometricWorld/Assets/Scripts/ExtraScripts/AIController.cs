@@ -11,7 +11,7 @@ public class AIController : MonoBehaviour
 	public bool loopPath = false;
 
 	private int curr = 0;
-	private Animator animator;
+	//private Animator animator;
 	private AStarPathfinder pathfinder;
 
 	public enum State
@@ -23,7 +23,7 @@ public class AIController : MonoBehaviour
 	public void Start()
 	{
 		pathfinder = this.GetComponent<AStarPathfinder>();
-		animator = this.GetComponent<Animator>();
+		//animator = this.GetComponent<Animator>();
 	}
 
 	public void Update()
@@ -50,7 +50,7 @@ public class AIController : MonoBehaviour
 		{
 			if(curr > path.Count -1)
 			{
-				animator.SetFloat("Speed", 0.0f);
+				//animator.SetFloat("Speed", 0.0f);
 				return;
 			}
 
@@ -59,7 +59,7 @@ public class AIController : MonoBehaviour
 			transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * 10.0f);
 
 //			transform.Translate(Vector3.forward * Time.deltaTime * 1.5f);
-			animator.SetFloat("Speed", 2.0f);
+			//animator.SetFloat("Speed", 2.0f);
 
 			Vector3 target = path[curr].gameObject.transform.position;
 			if(Vector3.Distance(transform.position, new Vector3(target.x, transform.position.y, target.z)) < 0.1f)
@@ -87,7 +87,7 @@ public class AIController : MonoBehaviour
 					}
 					else
 					{
-						animator.SetFloat("Speed", 0.0f);
+						//animator.SetFloat("Speed", 0.0f);
 						return;
 					}
 				}

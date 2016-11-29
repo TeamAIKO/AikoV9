@@ -5,7 +5,8 @@ public class Waypoint : MonoBehaviour
 {
 	public Tile tile;
 
-	public void Start()
+    //changed from Start To Update
+	public void Update()
 	{
 		RaycastHit hit;
 		if(Physics.Raycast(this.transform.position, Vector3.down, out hit, 100f))
