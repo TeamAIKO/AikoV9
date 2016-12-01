@@ -10,6 +10,7 @@ public class AIController : MonoBehaviour
 	public List<Tile> path = new List<Tile>();
 	public bool loopPath = false;
 
+    public int enemyTilesMoved;
 	private int curr = 0;
 	//private Animator animator;
 	private AStarPathfinder pathfinder;
@@ -72,7 +73,10 @@ public class AIController : MonoBehaviour
 			if(Vector3.Distance(transform.position, new Vector3(target.x, transform.position.y, target.z)) < 0.1f)
 			{
 				curr++;
-			}
+
+                if (curr > 1)
+                    enemyTilesMoved++;
+            }
 
             //calculate distance to the next waypoint
 			Transform wpTr = waypoints[currWaypoint].gameObject.GetComponent<Waypoint>().tile.gameObject.transform;

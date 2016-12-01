@@ -43,11 +43,11 @@ public class PlayerCamera : MonoBehaviour
         // Trigger functions if Rotate is requested
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            targetAngle -= 90.0f;
+            targetAngle -= 45.0f;
         } 
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {      
-            targetAngle += 90.0f;
+            targetAngle += 45.0f;
         }
 
         if (targetAngle != 0)
