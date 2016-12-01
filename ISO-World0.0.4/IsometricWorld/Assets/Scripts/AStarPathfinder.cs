@@ -14,6 +14,7 @@ public class AStarPathfinder : MonoBehaviour
 	public List<Tile> closeList = new List<Tile>();
 
 	public List<Tile> myPath;
+    
 
     public static AStarPathfinder instance;
 
@@ -101,8 +102,10 @@ public class AStarPathfinder : MonoBehaviour
 	private void BuildPath()
 	{
 		myPath.Clear();
+        
 
 		List<Tile> pathTotarget = new List<Tile>();
+        
 
 		Tile node = end;
 
@@ -120,6 +123,7 @@ public class AStarPathfinder : MonoBehaviour
 
 //		Debug.Log(pathTotarget.Count);
 		myPath = pathTotarget;
+        
 
 		pathTotarget = new List<Tile>();
 		openList = new List<Tile>();

@@ -7,7 +7,8 @@ public class TurnBased : MonoBehaviour
     public int NumberOfMoves;
     public int MovesMade;
 
-    public int pathLength;
+    public int PlayerPathLength;
+    public int enemyPathLength;
 
     public int EnemyMoves;
     public GameObject Player;
@@ -47,8 +48,9 @@ public class TurnBased : MonoBehaviour
     void Update()
     {
 
-        MovesMade = playerController.tilesMoved;
-        pathLength = AStarPathfinder.instance.myPath.Count - 1;
+        //MovesMade = playerController.tilesMoved;
+        MovesMade = PlayerController.instance.tilesMoved;
+        PlayerPathLength = PlayerController.instance.path.Count - 1;
 
         switch (currentState)
         {
@@ -85,7 +87,7 @@ public class TurnBased : MonoBehaviour
                     
                 }
 
-                else if (MovesMade == pathLength)
+                else if (MovesMade == PlayerPathLength)
                 {
                     currentState = GameStates.EndTurn;
                     
@@ -96,8 +98,9 @@ public class TurnBased : MonoBehaviour
                 //when the player has run out of turn goes to end turn then staight to enemy turn 
                 Debug.Log("End Turn");
                 PlayerCanMove = false;
-                this.gameObject.GetComponent<PlayerController>().animator.SetBool("run", false);
+                //this.gameObject.GetComponent<PlayerController>().animator.SetBool("run", false);
 
+                PlayerController.instance.animator.SetBool("run", false);
                 PlayerController.instance.pathConfirmed = false;
 
 

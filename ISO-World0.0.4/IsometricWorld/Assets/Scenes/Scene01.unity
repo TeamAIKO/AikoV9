@@ -1417,7 +1417,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!114 &278029424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8850,6 +8850,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fec6a636254148e98a73e3d848a6e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  path: []
   pathConfirmed: 0
   isRunning: 0
   animator: {fileID: 118896875}
@@ -8860,14 +8861,15 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1751672792}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c8ab3d9e1e4abe4680990ee66d1a18a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   NumberOfMoves: 5
   MovesMade: 0
-  pathLength: 0
+  PlayerPathLength: 0
+  enemyPathLength: 0
   EnemyMoves: 0
   Player: {fileID: 1751672792}
   turnInProgress: 0
@@ -9744,6 +9746,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1899175251}
   - 114: {fileID: 1899175250}
+  - 114: {fileID: 1899175252}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -9775,7 +9778,27 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
+--- !u!114 &1899175252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1899175249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c8ab3d9e1e4abe4680990ee66d1a18a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NumberOfMoves: 5
+  MovesMade: 0
+  PlayerPathLength: 0
+  enemyPathLength: 0
+  EnemyMoves: 0
+  Player: {fileID: 1751672792}
+  turnInProgress: 0
+  playerController: {fileID: 1751672798}
+  currentState: 0
 --- !u!1001 &1913415303
 Prefab:
   m_ObjectHideFlags: 0

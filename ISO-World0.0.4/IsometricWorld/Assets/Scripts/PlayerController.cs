@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
-    private List<Tile> path;
+    //changed from private to public for a test
+    public List<Tile> path;
     private int curr = 0;
 
     public static PlayerController instance;
@@ -14,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public Animator animator;    
 
     private TurnBased turn;
+    public int tilesMoved = 0;
 
     public void SetPath(List<Tile> p)
     {
@@ -29,7 +31,7 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    public int tilesMoved = 0;
+    
 
     public void Update()
     {
