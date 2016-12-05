@@ -2845,7 +2845,7 @@ GameObject:
   - 114: {fileID: 585572587}
   m_Layer: 0
   m_Name: EnemyAI
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2874,7 +2874,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 585572586}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff3bff179c2083843a2cb0575b69ce94, type: 3}
   m_Name: 
@@ -2887,6 +2887,7 @@ MonoBehaviour:
   path: []
   loopPath: 1
   enemyTilesMoved: 0
+  Enemies: []
 --- !u!23 &585572589
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9747,6 +9748,7 @@ GameObject:
   - 4: {fileID: 1899175251}
   - 114: {fileID: 1899175250}
   - 114: {fileID: 1899175252}
+  - 114: {fileID: 1899175253}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -9799,6 +9801,24 @@ MonoBehaviour:
   turnInProgress: 0
   playerController: {fileID: 1751672798}
   currentState: 0
+--- !u!114 &1899175253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1899175249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff3bff179c2083843a2cb0575b69ce94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints: []
+  currWaypoint: 0
+  currentState: 1
+  path: []
+  loopPath: 0
+  enemyTilesMoved: 0
+  Enemies: []
 --- !u!1001 &1913415303
 Prefab:
   m_ObjectHideFlags: 0

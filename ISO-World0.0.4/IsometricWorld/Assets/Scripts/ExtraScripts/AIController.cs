@@ -12,8 +12,11 @@ public class AIController : MonoBehaviour
 
     public int enemyTilesMoved;
 	private int curr = 0;
+
+    public GameObject[] Enemies;
 	//private Animator animator;
 	private AStarPathfinder pathfinder;
+    
 
 	public enum State
 	{
@@ -24,7 +27,9 @@ public class AIController : MonoBehaviour
 	public void Start()
 	{
 		pathfinder = this.GetComponent<AStarPathfinder>();
-		//animator = this.GetComponent<Animator>();
+        //animator = this.GetComponent<Animator>();
+
+        Enemies = GameObject.FindGameObjectsWithTag("Enemy");
 	}
 
 	public void Update()
