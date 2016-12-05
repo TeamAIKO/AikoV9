@@ -15,7 +15,7 @@ public class AIController : MonoBehaviour
 
     public GameObject[] Enemies;
 	//private Animator animator;
-	private AStarPathfinder pathfinder;
+	public AStarPathfinder pathfinder;
     
 
 	public enum State
@@ -30,6 +30,8 @@ public class AIController : MonoBehaviour
         //animator = this.GetComponent<Animator>();
 
         Enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        pathfinder = AStarPathfinder.instance;
 	}
 
 	public void Update()
@@ -129,6 +131,8 @@ public class AIController : MonoBehaviour
 		pathfinder.Search();
 
 		path = pathfinder.myPath;
+
+        
 	}
 
 }
