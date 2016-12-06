@@ -46,9 +46,14 @@ public class GridMaker : MonoBehaviour
 		mainCamera = Camera.main;
 		path = this.GetComponent<AStarPathfinder>();
 
-		CreateTiles();
+        //CreateTiles();
+        GameObject[] tt = GameObject.FindGameObjectsWithTag("Tile");
+        foreach (GameObject tile in tt)
+        {
+            tiles.Add(tile.transform);
+        }
 
-		SearchAdjacentTiles();
+        SearchAdjacentTiles();
 
         //MovesLeft = NumberOfMoves;
 
