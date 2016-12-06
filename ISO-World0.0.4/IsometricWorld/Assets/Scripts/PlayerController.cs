@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+
         if (TurnBased.PlayerCanMove == false)
         {
             return;
@@ -64,6 +65,7 @@ public class PlayerController : MonoBehaviour
 
         else
         {
+            //moves the player
             Vector3 toTarget = path[curr].gameObject.transform.position - this.transform.position;
             Quaternion rot = Quaternion.LookRotation(new Vector3(toTarget.x, 0, toTarget.z));
             transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * 10.0f);
@@ -82,12 +84,5 @@ public class PlayerController : MonoBehaviour
             if(curr > 1)
              tilesMoved++;
         }
-
-       
-
-
-    }
-
-
-        
+    }      
 }

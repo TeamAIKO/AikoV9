@@ -6,19 +6,25 @@ public class TurnBased : MonoBehaviour
 {
     public int NumberOfMoves;
     public int MovesMade;
+    
 
     public int PlayerPathLength;
     public int enemyPathLength;
 
+    public int EnemyMovesMade;
     public int EnemyMoves;
     public GameObject Player;
 
-    
+    public static bool EnemyCanMove;
     public static bool PlayerCanMove;
+
     public bool turnInProgress = false;
 
     public PlayerController playerController;
-
+    public static TurnBased instance;
+    public GameObject[] Enemies;
+    
+    
     public enum GameStates
     {
         Planning,
@@ -34,14 +40,16 @@ public class TurnBased : MonoBehaviour
     {        
         currentState = GameStates.Planning;
 
-        
-        
+        //finding all game objects with the tag of "Enemy"
+        Enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+
         //getting a reference to the PlayerController script
         //GameObject thePlayer = GameObject.Find("Player");
-        //PlayerController playerController = thePlayer.GetComponent<PlayerController>();
-
+        //PlayerController playerController = thePlayer.GetComponent<PlayerController>();    
         
-              
+           
+        TotalMoves();
     }
 
     // Update is called once per frame
@@ -51,6 +59,7 @@ public class TurnBased : MonoBehaviour
         //MovesMade = playerController.tilesMoved;
         MovesMade = PlayerController.instance.tilesMoved;
         PlayerPathLength = PlayerController.instance.path.Count - 1;
+        
 
         switch (currentState)
         {
@@ -62,7 +71,8 @@ public class TurnBased : MonoBehaviour
             case (GameStates.Planning):
 
                 //Debug.Log("Planning");
-                
+                EnemyCanMove = false;
+
                 if (PlayerController.instance.pathConfirmed == true)
                 {
                     currentState = GameStates.PlayerTurn;
@@ -116,6 +126,7 @@ public class TurnBased : MonoBehaviour
                 //currentState = GameStates.PlayerTurn;                             
                 Debug.Log("Enemy Turn");
 
+                EnemyCanMove = true;
                 
                 if (EnemyMoves <= 0)
                 {
@@ -164,5 +175,13 @@ public class TurnBased : MonoBehaviour
         Player.GetComponent<PlayerController>().pathConfirmed = false;
     }
 
-    
+    //takes the number of moves avaible from each individual AI character and adds them all together
+    //to get the total number of moves avaible
+    void TotalMoves()
+    {
+        for (int i = 0; i < Enemies.Length; i++)
+        {
+            EnemyMoves += Enemies[i].GetComponent<AIController>().MovesToMake;
+        }
+    }
 }
