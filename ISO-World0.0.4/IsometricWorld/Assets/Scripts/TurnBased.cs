@@ -42,7 +42,7 @@ public class TurnBased : MonoBehaviour
 
         //finding all game objects with the tag of "Enemy"
         Enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
+        //EnemyMovesMade = AIController.instance.enemyTilesMoved;
 
         //getting a reference to the PlayerController script
         //GameObject thePlayer = GameObject.Find("Player");
@@ -50,6 +50,8 @@ public class TurnBased : MonoBehaviour
         
            
         TotalMoves();
+        //EnemyMovesBeingMade();
+        
     }
 
     // Update is called once per frame
@@ -59,6 +61,8 @@ public class TurnBased : MonoBehaviour
         //MovesMade = playerController.tilesMoved;
         MovesMade = PlayerController.instance.tilesMoved;
         PlayerPathLength = PlayerController.instance.path.Count - 1;
+
+        //EnemyMovesBeingMade();
         
 
         switch (currentState)
@@ -182,6 +186,19 @@ public class TurnBased : MonoBehaviour
         for (int i = 0; i < Enemies.Length; i++)
         {
             EnemyMoves += Enemies[i].GetComponent<AIController>().MovesToMake;
+            //EnemyMovesMade += Enemies[i].GetComponent<AIController>().enemyTilesMoved;
+        }
+    }
+
+    //counts how many moves the enemy is making
+    void EnemyMovesBeingMade()
+    {
+        foreach(GameObject enemies in Enemies)
+        {
+            //EnemyMoves += Enemies[i].GetComponent<AIController>().MovesToMake;
+            // EnemyMovesMade += Enemies[i].GetComponent<AIController>().enemyTilesMoved;
+            EnemyMovesMade += enemies.GetComponent<AIController>().enemyTilesMoved;
+            
         }
     }
 }

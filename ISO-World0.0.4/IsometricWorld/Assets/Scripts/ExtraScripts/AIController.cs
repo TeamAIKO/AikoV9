@@ -63,11 +63,11 @@ public class AIController : MonoBehaviour
         //{
         //  return;
         //}
-       // if (enemyTilesMoved == MovesToMake)
-        //{
-            //Moved = true;   
-            //return;
-        //}
+       if (enemyTilesMoved == MovesToMake)
+        {
+            Moved = true;   
+            return;
+        }
         else
         {
             if (curr > path.Count - 1)
@@ -100,6 +100,7 @@ public class AIController : MonoBehaviour
 
                 if (curr > 1)
                     enemyTilesMoved++;
+               
             }
 
             //calculate distance to the next waypoint
