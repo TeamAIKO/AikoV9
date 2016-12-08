@@ -4,9 +4,14 @@ using System.Collections.Generic;
 
 public class GridBake : MonoBehaviour 
 {
+    //how maximum amount of tiles that will be created ie a 10x10 square
 	public int totalHorizontalTiles = 10;
 	public int totalVerticalTiles = 10;
+
+    //the amount that will be created each time a time the bake button is pressed ie a 4X4 square
 	public int bakingStep = 4;
+
+    //finding the prefab for the tile to be created
 	public GameObject tilePrefab;
 	public List<GameObject> tiles = new List<GameObject>();
 
@@ -32,6 +37,8 @@ public class GridBake : MonoBehaviour
 					tile.transform.position = hit.point + new Vector3(0.0f, 0.01f, 0.0f);
 
                     tiles.Add(tile);
+
+                    //destroys the tile if the ray hits an abject that isnt on the layer walkable
                     if (hit.transform.gameObject.layer != LayerMask.NameToLayer("Walkable"))
                     {
                         DestroyImmediate(tile.gameObject);
@@ -60,7 +67,7 @@ public class GridBake : MonoBehaviour
 		if(stepX >= totalHorizontalTiles)
 		{
 			stepX = 0;
-			stepY += 2;
+			stepY += bakingStep;
 		}
 	}
 
