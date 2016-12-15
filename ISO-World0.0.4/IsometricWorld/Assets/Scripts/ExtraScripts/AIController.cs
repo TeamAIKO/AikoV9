@@ -100,7 +100,7 @@ public class AIController : MonoBehaviour
 
                 if (curr > 1)
                     enemyTilesMoved++;
-               
+                
             }
 
             //calculate distance to the next waypoint

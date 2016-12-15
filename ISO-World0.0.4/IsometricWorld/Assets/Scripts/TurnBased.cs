@@ -61,9 +61,9 @@ public class TurnBased : MonoBehaviour
         //MovesMade = playerController.tilesMoved;
         MovesMade = PlayerController.instance.tilesMoved;
         PlayerPathLength = PlayerController.instance.path.Count - 1;
-
-        //EnemyMovesBeingMade();
         
+     
+
 
         switch (currentState)
         {
@@ -96,9 +96,7 @@ public class TurnBased : MonoBehaviour
                 {
                     Debug.Log("Out of Moves");
                     currentState = GameStates.EndTurn;
-                    PlayerCanMove = false;
-                    
-                    
+                    PlayerCanMove = false;                                      
                 }
 
                 else if (MovesMade == PlayerPathLength)
