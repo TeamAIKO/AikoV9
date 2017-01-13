@@ -22,15 +22,16 @@ public class AIController : MonoBehaviour
 	public AStarPathfinder pathfinder;
 
     public static AIController instance;
-
-	public enum State
+    private TurnBased turnBased;
+    public enum State
 	{
 		Idle = 0,
 		Patrolling = 1
 	}   
 	public void Start()
 	{
-		pathfinder = this.GetComponent<AStarPathfinder>();
+        turnBased = GameObject.Find("GameManager").GetComponent<TurnBased>();
+        pathfinder = this.GetComponent<AStarPathfinder>();
         //animator = this.GetComponent<Animator>();
 
         //Enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -40,98 +41,107 @@ public class AIController : MonoBehaviour
 
 	public void Update()
 	{
-		switch(currentState)
-		{
-		case State.Idle:
-			break;
+        switch (currentState)
+        {
+            case State.Idle:
+                break;
 
-		case State.Patrolling:
-			DoPatrol();
-			break;
+
+        case State.Patrolling:
+                DoPatrol();
+                break;
+                   
 		}
 	}
 
     private void DoPatrol()
     {
-        if (path.Count == 0)
+        if (TurnBased.EnemyCanMove == true)
         {
-            curr = 0;
-            SearchPath(waypoints[currWaypoint]);
-        }
-
-        //if (TurnBased.EnemyCanMove == false)
-        //{
-        //  return;
-        //}
-       if (enemyTilesMoved == MovesToMake)
-        {
-            Moved = true;   
-            return;
-        }
-        else
-        {
-            if (curr > path.Count - 1)
+            if (path.Count == 0)
             {
-                //animator.SetFloat("Speed", 0.0f);
+                curr = 0;
+                SearchPath(waypoints[currWaypoint]);
+            }
+
+            //if (TurnBased.EnemyCanMove == false)
+            //{
+            //  return;
+            //}
+            if (enemyTilesMoved == MovesToMake)
+            {
+                Moved = true;
                 return;
             }
-
-            //vector to new tile
-            Vector3 toTarget = path[curr].gameObject.transform.position - this.transform.position;
-
-            //calculate rotation looking to destiny
-            Quaternion rot = Quaternion.LookRotation(new Vector3(toTarget.x, 0, toTarget.z));
-
-            //apply rotation to this transform
-            transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * 10.0f);
-
-            //move this transform to tile destination
-            //this needs to change animator speed instead if using mecanim root control
-            transform.Translate(Vector3.forward * Time.deltaTime * 1.5f);
-            //animator.SetFloat("Speed", 2.0f);
-
-            //get the tile from the path that we are currently heading
-            Vector3 target = path[curr].gameObject.transform.position;
-
-            //if we are close enough to the current tile, move to the next one
-            if (Vector3.Distance(transform.position, new Vector3(target.x, transform.position.y, target.z)) < 0.1f)
+            else
             {
-                curr++;
-
-                if (curr > 1)
-                    enemyTilesMoved++;
-                
-            }
-
-            //calculate distance to the next waypoint
-            Transform wpTr = waypoints[currWaypoint].gameObject.GetComponent<Waypoint>().tile.gameObject.transform;
-            Vector3 wp = new Vector3(wpTr.position.x, this.transform.position.y, wpTr.position.z);
-            float distToCurrWaypoint = Vector3.Distance(this.transform.position, wp);
-
-            //if distance to waypoint is close enough, either stop or move to first again if we are looping
-            if (distToCurrWaypoint < 0.2f)
-            {
-                if (currWaypoint < waypoints.Length - 1)
+                if (curr > path.Count - 1)
                 {
-                    currWaypoint++;
-                    path.Clear();
+                    //animator.SetFloat("Speed", 0.0f);
+                    return;
                 }
-                else
+
+                //vector to new tile
+                Vector3 toTarget = path[curr].gameObject.transform.position - this.transform.position;
+
+                //calculate rotation looking to destiny
+                Quaternion rot = Quaternion.LookRotation(new Vector3(toTarget.x, 0, toTarget.z));
+
+                //apply rotation to this transform
+                transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * 10.0f);
+
+                //move this transform to tile destination
+                //this needs to change animator speed instead if using mecanim root control
+                transform.Translate(Vector3.forward * Time.deltaTime * 1.5f);
+                //animator.SetFloat("Speed", 2.0f);
+
+                //get the tile from the path that we are currently heading
+                Vector3 target = path[curr].gameObject.transform.position;
+
+                //if we are close enough to the current tile, move to the next one
+                if (Vector3.Distance(transform.position, new Vector3(target.x, transform.position.y, target.z)) < 0.1f)
                 {
-                    if (loopPath)
+                    curr++;
+
+                    if (curr > 1)
                     {
-                        currWaypoint = 0;
+                        enemyTilesMoved++;
+                        turnBased.EnemyMovesMade++;
+                    }
+                       
+
+                }
+
+                //calculate distance to the next waypoint
+                Transform wpTr = waypoints[currWaypoint].gameObject.GetComponent<Waypoint>().tile.gameObject.transform;
+                Vector3 wp = new Vector3(wpTr.position.x, this.transform.position.y, wpTr.position.z);
+                float distToCurrWaypoint = Vector3.Distance(this.transform.position, wp);
+
+                //if distance to waypoint is close enough, either stop or move to first again if we are looping
+                if (distToCurrWaypoint < 0.2f)
+                {
+                    if (currWaypoint < waypoints.Length - 1)
+                    {
+                        currWaypoint++;
                         path.Clear();
                     }
                     else
                     {
-                        //animator.SetFloat("Speed", 0.0f);
-                        return;
+                        if (loopPath)
+                        {
+                            currWaypoint = 0;
+                            path.Clear();
+                        }
+                        else
+                        {
+                            //animator.SetFloat("Speed", 0.0f);
+                            return;
+                        }
                     }
                 }
             }
         }
-	}
+    }
 
 	private void SearchPath(GameObject wp)
 	{

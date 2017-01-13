@@ -76,7 +76,7 @@ public class TurnBased : MonoBehaviour
 
                 //Debug.Log("Planning");
                 EnemyCanMove = false;
-
+                EnemyMovesMade = 0;
                 if (PlayerController.instance.pathConfirmed == true)
                 {
                     currentState = GameStates.PlayerTurn;
@@ -130,12 +130,17 @@ public class TurnBased : MonoBehaviour
 
                 EnemyCanMove = true;
                 
-                if (EnemyMoves <= 0)
+                if (EnemyMovesMade >= EnemyMoves)
                 {
+                    
+                    Debug.Log("enemy moves finished");
                     currentState = GameStates.Planning;
                     //MovesMade = NumberOfMoves + 1;
                     playerController.tilesMoved = 0;
+                    //reset enemy turns
+                    ResetEnemyMoves();
                 }
+               
                 break;
         }
     }
@@ -197,6 +202,14 @@ public class TurnBased : MonoBehaviour
             // EnemyMovesMade += Enemies[i].GetComponent<AIController>().enemyTilesMoved;
             EnemyMovesMade += enemies.GetComponent<AIController>().enemyTilesMoved;
             
+        }
+    }
+    void ResetEnemyMoves()
+    {
+        for (int i = 0; i < Enemies.Length; i++)
+        {
+           Enemies[i].GetComponent<AIController>().enemyTilesMoved = 0;
+            //EnemyMovesMade += Enemies[i].GetComponent<AIController>().enemyTilesMoved;
         }
     }
 }
