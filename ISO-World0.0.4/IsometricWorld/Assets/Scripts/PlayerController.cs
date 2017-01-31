@@ -11,11 +11,19 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
     public bool pathConfirmed = false;
     public bool isRunning = false;
-    
-    public Animator animator;    
+
+    public Animator animator;
 
     private TurnBased turn;
     public int tilesMoved = 0;
+
+    //variables for the double click 
+    private bool oneClick = false;
+    private bool timerIsRunning;
+    public float timeForDoubleClick;
+
+    //this is how long to allow for double click
+    public float delay;
 
     public void SetPath(List<Tile> p)
     {
@@ -28,10 +36,10 @@ public class PlayerController : MonoBehaviour
         instance = this;
 
         turn = this.gameObject.GetComponent<TurnBased>();
-        
+
     }
 
-    
+
 
     public void Update()
     {
@@ -39,12 +47,12 @@ public class PlayerController : MonoBehaviour
             return;
 
         isRunning = true;
-        
+
 
         //if (!pathConfirmed || curr > path.Count - 1)
-        if ( curr > path.Count - 1)
+        if (curr > path.Count - 1)
         {
-            
+
             isRunning = false;
             animator.SetBool("run", isRunning);
             return;
@@ -60,7 +68,7 @@ public class PlayerController : MonoBehaviour
 
             //transform.Translate(Vector3.forward * Time.deltaTime * 1.5f);
 
-           // animator.SetBool("run", isRunning);
+            // animator.SetBool("run", isRunning);
         }
 
         else
@@ -81,8 +89,40 @@ public class PlayerController : MonoBehaviour
         {
             curr++;
 
-            if(curr > 1)
-             tilesMoved++;
+            if (curr > 1)
+                tilesMoved++;
         }
-    }      
+    }
+
+    //public void DoubleClick()
+    //{
+    //    if (Input.GetMouseButtonDown(0))
+    //    {
+    //        if (!oneClick) // first click no previous clicks
+    //        {
+    //            oneClick = true;
+
+    //            timeForDoubleClick = Time.time; // save the current time
+    //                                                // do one click things;
+    //        }
+    //        else
+    //        {
+    //            oneClick = false; // found a double click, now reset
+
+                
+    //        }
+    //    }
+    //    if (oneClick)
+    //    {
+    //        // if the time now is delay seconds more than when the first click started. 
+    //        if ((Time.time - timeForDoubleClick) > delay
+    //     {
+
+    //            //basically if thats true its been too long and we want to reset so the next click is simply a single click and not a double click.
+
+    //            oneClick = false;
+
+    //        }
+    //    }
+    //}
 }
