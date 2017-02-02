@@ -219,6 +219,10 @@ public class GridMaker : MonoBehaviour
                     SetStartAndFinalTiles(hit);
 
                     SearchPath(hit);
+
+                    //confirming the path the enable the gameplay
+                    PlayerController.instance.pathConfirmed = true;
+                    Debug.Log("Confirmed Path");
                 }
             }
             if (oneClick)
