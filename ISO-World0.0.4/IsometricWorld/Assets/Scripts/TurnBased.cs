@@ -129,6 +129,12 @@ public class TurnBased : MonoBehaviour
                 Debug.Log("Enemy Turn");
 
                 EnemyCanMove = true;
+
+                for (int i = 0; i < Enemies.Length; i++)
+
+                {
+                    Debug.Log(Enemies[i].name);
+                }
                 
                 if (EnemyMovesMade >= EnemyMoves)
                 {
