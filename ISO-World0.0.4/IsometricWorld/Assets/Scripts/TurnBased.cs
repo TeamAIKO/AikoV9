@@ -13,6 +13,8 @@ public class TurnBased : MonoBehaviour
 
     public int EnemyMovesMade;
     public int EnemyMoves;
+    public static GameObject EnemyToMove;
+    private int Number = 0;
     public GameObject Player;
 
     public static bool EnemyCanMove;
@@ -127,9 +129,17 @@ public class TurnBased : MonoBehaviour
                 //put enemy Ai code in here. or reference the enemy Ai Script
                 //currentState = GameStates.PlayerTurn;                             
                 Debug.Log("Enemy Turn");
-
+                Number = 0;
                 EnemyCanMove = true;
 
+                EnemyToMove = Enemies[0];
+                EnemyToMove.GetComponent<AIController>();
+
+                if (EnemyToMove)
+                {
+                    
+                }
+               
                 for (int i = 0; i < Enemies.Length; i++)
 
                 {
@@ -155,6 +165,11 @@ public class TurnBased : MonoBehaviour
     void MoveCountDown()
     {
         MovesMade--;
+    }
+
+    void IterateThrough()
+    {
+        
     }
 
     void OnTriggerEnter(Collider other)

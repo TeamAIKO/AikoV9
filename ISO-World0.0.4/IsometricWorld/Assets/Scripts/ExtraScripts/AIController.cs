@@ -56,7 +56,7 @@ public class AIController : MonoBehaviour
 
     private void DoPatrol()
     {
-        if (TurnBased.EnemyCanMove == true)
+        if (TurnBased.EnemyCanMove == true && TurnBased.EnemyToMove == this.gameObject)
         {
             if (path.Count == 0)
             {
