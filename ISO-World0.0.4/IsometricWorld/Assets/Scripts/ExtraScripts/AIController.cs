@@ -2,34 +2,39 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class AIController : MonoBehaviour 
+public class AIController : MonoBehaviour
 {
-	public GameObject[] waypoints;
-	public int currWaypoint = 0;
-	public State currentState = State.Patrolling;
-	public List<Tile> path = new List<Tile>();
-	public bool loopPath = false;
+    public GameObject[] waypoints;
+    public int currWaypoint = 0;
+    public State currentState = State.Patrolling;
+    public List<Tile> path = new List<Tile>();
+    public bool loopPath = false;
 
     public bool Moved = false;
 
     public int enemyTilesMoved;
     public int MovesToMake;
 
-	private int curr = 0;
+
+    private int curr = 0;
+
+
 
     //public GameObject[] Enemies;
-	//private Animator animator;
-	public AStarPathfinder pathfinder;
+    //private Animator animator;
+    public AStarPathfinder pathfinder;
 
     public static AIController instance;
     private TurnBased turnBased;
     public enum State
-	{
-		Idle = 0,
-		Patrolling = 1
-	}   
-	public void Start()
-	{
+    {
+        Idle = 0,
+        Patrolling = 1,
+
+
+    }
+    public void Start()
+    {
         turnBased = GameObject.Find("GameManager").GetComponent<TurnBased>();
         pathfinder = this.GetComponent<AStarPathfinder>();
         //animator = this.GetComponent<Animator>();
@@ -37,22 +42,27 @@ public class AIController : MonoBehaviour
         //Enemies = GameObject.FindGameObjectsWithTag("Enemy");
         //MovesToMake = TurnBased.instance.EnemyMoves;
         pathfinder = AStarPathfinder.instance;
-	}
 
-	public void Update()
-	{
+
+    }
+
+    public void Update()
+    {
         switch (currentState)
         {
             case State.Idle:
                 break;
 
 
-        case State.Patrolling:
+            case State.Patrolling:
+
                 DoPatrol();
                 break;
-                   
-		}
-	}
+
+
+
+        }
+    }
 
     private void DoPatrol()
     {
@@ -64,10 +74,7 @@ public class AIController : MonoBehaviour
                 SearchPath(waypoints[currWaypoint]);
             }
 
-            //if (TurnBased.EnemyCanMove == false)
-            //{
-            //  return;
-            //}
+
             if (enemyTilesMoved == MovesToMake)
             {
                 Moved = true;
@@ -77,7 +84,6 @@ public class AIController : MonoBehaviour
             {
                 if (curr > path.Count - 1)
                 {
-                    //animator.SetFloat("Speed", 0.0f);
                     return;
                 }
 
@@ -108,7 +114,7 @@ public class AIController : MonoBehaviour
                         enemyTilesMoved++;
                         turnBased.EnemyMovesMade++;
                     }
-                       
+
 
                 }
 
@@ -134,7 +140,6 @@ public class AIController : MonoBehaviour
                         }
                         else
                         {
-                            //animator.SetFloat("Speed", 0.0f);
                             return;
                         }
                     }
@@ -143,25 +148,28 @@ public class AIController : MonoBehaviour
         }
     }
 
-	private void SearchPath(GameObject wp)
-	{
-		if(pathfinder.myPath.Count > 0)
-			pathfinder.myPath.Clear();
 
-		RaycastHit h;
-		if(Physics.Raycast(this.transform.position + new Vector3(0,1f,0), Vector3.down, out h, 100f))
-		{
-			pathfinder.start = h.transform.gameObject.GetComponent<Tile>();
-		}
 
-		pathfinder.end = wp.GetComponent<Waypoint>().tile;
+    private void SearchPath(GameObject wp)
+    {
+        if (pathfinder.myPath.Count > 0)
+            pathfinder.myPath.Clear();
 
-		pathfinder.Search();
+        RaycastHit h;
+        if (Physics.Raycast(this.transform.position + new Vector3(0, 1f, 0), Vector3.down, out h, 100f))
+        {
+            pathfinder.start = h.transform.gameObject.GetComponent<Tile>();
+        }
 
-		path = pathfinder.myPath;
+        pathfinder.end = wp.GetComponent<Waypoint>().tile;
 
-        
-	}
+        pathfinder.Search();
 
-  
+        path = pathfinder.myPath;
+
+
+    }
+
+
+
 }

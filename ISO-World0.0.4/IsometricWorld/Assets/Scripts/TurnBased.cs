@@ -14,7 +14,8 @@ public class TurnBased : MonoBehaviour
     public int EnemyMovesMade;
     public int EnemyMoves;
     public static GameObject EnemyToMove;
-    private int Number = 0;
+    public GameObject ExtraEnemy;
+    public int Number = 0;
     public GameObject Player;
 
     public static bool EnemyCanMove;
@@ -79,6 +80,7 @@ public class TurnBased : MonoBehaviour
                 //Debug.Log("Planning");
                 EnemyCanMove = false;
                 EnemyMovesMade = 0;
+                Number = 0;
                 if (PlayerController.instance.pathConfirmed == true)
                 {
                     currentState = GameStates.PlayerTurn;
@@ -129,15 +131,15 @@ public class TurnBased : MonoBehaviour
                 //put enemy Ai code in here. or reference the enemy Ai Script
                 //currentState = GameStates.PlayerTurn;                             
                 Debug.Log("Enemy Turn");
-                Number = 0;
+                
                 EnemyCanMove = true;
-
-                EnemyToMove = Enemies[0];
+                ExtraEnemy = EnemyToMove;
+                EnemyToMove = Enemies[Number];
                 EnemyToMove.GetComponent<AIController>();
 
-                if (EnemyToMove)
+                if (EnemyToMove.GetComponent<AIController>().enemyTilesMoved >= EnemyToMove.GetComponent<AIController>().MovesToMake)
                 {
-                    
+                    Number++;
                 }
                
                 for (int i = 0; i < Enemies.Length; i++)
