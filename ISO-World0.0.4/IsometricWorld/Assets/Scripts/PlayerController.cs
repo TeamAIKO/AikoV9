@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     //this is how long to allow for double click
     public float delay;
 
+    public Tile currentTile;
    
     public void SetPath(List<Tile> p)
     {
@@ -45,7 +46,11 @@ public class PlayerController : MonoBehaviour
     public void Update()
     {
         //find the players tile so that the AI can use it like a waypoint
-        
+        RaycastHit hit;
+        if (Physics.Raycast(this.transform.position, Vector3.down, out hit, 100f))
+        {
+            currentTile = hit.transform.gameObject.GetComponent<Tile>();
+        }
 
         if (path == null || path.Count == 0)
             return;

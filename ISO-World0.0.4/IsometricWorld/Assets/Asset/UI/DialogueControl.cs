@@ -59,12 +59,12 @@ public class DialogueControl : MonoBehaviour
 
     public void NextMessage()
     {
-        Debug.Log(currentCharacter);
+        //Debug.Log(currentCharacter);
 
         if (currentCharacter == null)
             return;
 
-        Debug.Log("currentLine: " + currentLine);
+        //Debug.Log("currentLine: " + currentLine);
 
         currentLine++;
         if(currentLine >= currentCharacter.dialogues.Length)

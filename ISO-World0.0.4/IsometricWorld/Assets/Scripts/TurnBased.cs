@@ -169,10 +169,7 @@ public class TurnBased : MonoBehaviour
         MovesMade--;
     }
 
-    void IterateThrough()
-    {
-        
-    }
+    
 
     void OnTriggerEnter(Collider other)
     {
