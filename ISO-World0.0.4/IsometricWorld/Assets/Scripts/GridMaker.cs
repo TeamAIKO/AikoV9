@@ -121,6 +121,14 @@ public class GridMaker : MonoBehaviour
         }
     }
 
+    public void GetTilesInRange(Tile curr, int range)
+    {
+        //List<Tile> adj = curr.adjacentNodes;
+        //Debug.Log(adj.Count);
+
+        Debug.Log("curr: " + curr.gridPos);
+    }
+
     private void SearchAdjacentTiles()
     {
         foreach (Transform t in tiles)

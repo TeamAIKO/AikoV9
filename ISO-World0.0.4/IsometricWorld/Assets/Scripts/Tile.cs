@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class Tile : MonoBehaviour 
 {
 	public Vector2 gridPos = new Vector2();
-
 	public float f = 0;
 	public float g = 0;
 	public float h = 0;

@@ -6,7 +6,7 @@ public class TurnBased : MonoBehaviour
 {
     public int NumberOfMoves;
     public int MovesMade;
-    
+
 
     public int PlayerPathLength;
     public int enemyPathLength;
@@ -26,8 +26,8 @@ public class TurnBased : MonoBehaviour
     public PlayerController playerController;
     public static TurnBased instance;
     public GameObject[] Enemies;
-    
-    
+
+
     public enum GameStates
     {
         Planning,
@@ -37,10 +37,10 @@ public class TurnBased : MonoBehaviour
     }
 
     public GameStates currentState;
-    
+
     // Use this for initialization
     void Start()
-    {        
+    {
         currentState = GameStates.Planning;
 
         //finding all game objects with the tag of "Enemy"
@@ -50,11 +50,11 @@ public class TurnBased : MonoBehaviour
         //getting a reference to the PlayerController script
         //GameObject thePlayer = GameObject.Find("Player");
         //PlayerController playerController = thePlayer.GetComponent<PlayerController>();    
-        
-           
+
+
         TotalMoves();
         //EnemyMovesBeingMade();
-        
+
     }
 
     // Update is called once per frame
@@ -64,18 +64,18 @@ public class TurnBased : MonoBehaviour
         //MovesMade = playerController.tilesMoved;
         MovesMade = PlayerController.instance.tilesMoved;
         PlayerPathLength = PlayerController.instance.path.Count - 1;
-        
-     
+
+
 
 
         switch (currentState)
         {
-            
-
-
+    
             //CREATE PLANNING - SET PATH CONFIRMED TO FALSE UNITLL BUTTON PRESS. WHEN CONFIRMED MOVE TO PLAYER TURN THEN CHANGE BOOL TO TRUE. TURN OFF ONCE CLOSE TO END NODE OR MOVES LEFT = 0
             //MAYBE TURN OFF RAYCASTING IN PLAYER TURN TO PREVENT CHEATING OF MOVES
             case (GameStates.Planning):
+
+                ShowTilesInRange(5);
 
                 //Debug.Log("Planning");
                 EnemyCanMove = false;
@@ -85,13 +85,13 @@ public class TurnBased : MonoBehaviour
                 {
                     currentState = GameStates.PlayerTurn;
                 }
-                
+
                 break;
 
             case (GameStates.PlayerTurn):
-                
-                    PlayerCanMove = true;
-                //Debug.Log("Player Turn");               
+
+                PlayerCanMove = true;
+                //Debug.Log("Player Turn"); 
 
                 //lock their transform. use bools for able to move. when they click end turn goes straight to enemy turn. count how many moves enemy has left
                 // when eney runs out of moves goes back to player turn. unlock their transform and resets moves left.
@@ -100,13 +100,13 @@ public class TurnBased : MonoBehaviour
                 {
                     Debug.Log("Out of Moves");
                     currentState = GameStates.EndTurn;
-                    PlayerCanMove = false;                                      
+                    PlayerCanMove = false;
                 }
 
                 else if (MovesMade == PlayerPathLength)
                 {
                     currentState = GameStates.EndTurn;
-                    
+
                 }
                 break;
 
@@ -121,7 +121,7 @@ public class TurnBased : MonoBehaviour
 
 
                 AStarPathfinder.instance.myPath.Clear();
-                
+
                 PlayerController.instance.isRunning = false;
 
                 currentState = GameStates.EnemyTurn;
@@ -131,7 +131,7 @@ public class TurnBased : MonoBehaviour
                 //put enemy Ai code in here. or reference the enemy Ai Script
                 //currentState = GameStates.PlayerTurn;                             
                 Debug.Log("Enemy Turn");
-                
+
                 EnemyCanMove = true;
                 ExtraEnemy = EnemyToMove;
                 EnemyToMove = Enemies[Number];
@@ -141,16 +141,16 @@ public class TurnBased : MonoBehaviour
                 {
                     Number++;
                 }
-               
+
                 for (int i = 0; i < Enemies.Length; i++)
 
                 {
                     Debug.Log(Enemies[i].name);
                 }
-                
+
                 if (EnemyMovesMade >= EnemyMoves)
                 {
-                    
+
                     Debug.Log("enemy moves finished");
                     currentState = GameStates.Planning;
                     //MovesMade = NumberOfMoves + 1;
@@ -158,9 +158,16 @@ public class TurnBased : MonoBehaviour
                     //reset enemy turns
                     ResetEnemyMoves();
                 }
-               
+
                 break;
         }
+    }
+
+    
+
+    private void ShowTilesInRange(int range)
+    {
+        GridMaker.Instance.GetTilesInRange(playerController.currentTile, 5);
     }
 
 

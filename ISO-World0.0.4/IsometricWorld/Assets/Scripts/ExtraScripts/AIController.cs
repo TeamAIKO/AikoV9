@@ -240,18 +240,7 @@ public class AIController : MonoBehaviour
                 Transform plTr = player.gameObject.GetComponent<PlayerController>().currentTile.gameObject.transform;
                 Vector3 pl = new Vector3(plTr.position.x, this.transform.position.y, plTr.position.z);
                 float distToPlpoint = Vector3.Distance(this.transform.position, pl);
-
-                //if (distToPlpoint < 0.2f && Vector3.Distance(transform.position, player.transform.position) <= ChaseDistance)
-                //{
-
-                //    SearchPathToPlayer(player);
-                //}
-
-                //else if (Vector3.Distance(transform.position, player.transform.position) > ChaseDistance)
-                //{
-                //    path.Clear();
-                //    currentState = State.Patrolling;
-                //}
+                
 
 
 
