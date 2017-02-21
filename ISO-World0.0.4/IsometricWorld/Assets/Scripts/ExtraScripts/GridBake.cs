@@ -10,7 +10,7 @@ public class GridBake : MonoBehaviour
 
     //the amount that will be created each time a time the bake button is pressed ie a 4X4 square
 	public int bakingStep = 4;
-
+    public float scale = 2.0f;
     //finding the prefab for the tile to be created
 	public GameObject tilePrefab;
 	public List<GameObject> tiles = new List<GameObject>();
@@ -25,8 +25,10 @@ public class GridBake : MonoBehaviour
 		{
 			for(int z = stepY ; z < stepY+bakingStep ; z++)
 			{
-				GameObject tile = (GameObject)Instantiate(tilePrefab, this.gameObject.transform.position + new Vector3(i, 0, -z), Quaternion.Euler(90f, 0, 0));
+				GameObject tile = (GameObject)Instantiate(tilePrefab, this.gameObject.transform.position + new Vector3(i * scale, 0, -z * scale), Quaternion.Euler(90f, 0, 0));
+                tile.transform.localScale = new Vector3(scale, scale, 1f);
 				tile.transform.parent = this.gameObject.transform;
+
 				tile.GetComponent<Tile>().gridPos = new Vector2(i, z);
 				tile.tag = "Tile";
 

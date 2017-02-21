@@ -151,7 +151,7 @@ public class TurnBased : MonoBehaviour
                 if (EnemyMovesMade >= EnemyMoves)
                 {
 
-                    Debug.Log("enemy moves finished");
+                    //Debug.Log("enemy moves finished");
                     currentState = GameStates.Planning;
                     //MovesMade = NumberOfMoves + 1;
                     playerController.tilesMoved = 0;

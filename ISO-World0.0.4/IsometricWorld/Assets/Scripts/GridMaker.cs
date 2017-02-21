@@ -64,6 +64,8 @@ public class GridMaker : MonoBehaviour
 
         SearchAdjacentTiles();
 
+        Debug.Log(tiles.Count);
+
         //MovesLeft = NumberOfMoves;
 
         //PlayerCollider = Player.GetComponent<Collider>();

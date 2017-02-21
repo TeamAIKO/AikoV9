@@ -14,7 +14,7 @@ public class AIController : MonoBehaviour
 
     public int enemyTilesMoved;
     public int MovesToMake;
-
+    public Tile TileToMoveTo;
 
     private int curr = 0;
     public float ChaseDistance = 5;
@@ -49,6 +49,7 @@ public class AIController : MonoBehaviour
 
     public void Update()
     {
+       
         switch (currentState)
         {
             case State.Idle:
@@ -63,8 +64,12 @@ public class AIController : MonoBehaviour
                 break;
 
             case State.Chasing:
-                UpdateChaseState();
-
+                    
+                    TileToMoveTo = PlayerController.instance.currentTile;
+                    UpdateChaseState();
+                
+               
+                
                 //DoChase();
                 break;
 
@@ -76,6 +81,7 @@ public class AIController : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, player.transform.position) <= ChaseDistance)
         {
+            
             path.Clear();
             currentState = State.Chasing;
         }
@@ -91,8 +97,7 @@ public class AIController : MonoBehaviour
 
         if (Vector3.Distance(transform.position, player.transform.position) > ChaseDistance)
         {
-            path.Clear();
-            
+            path.Clear();           
             currentState = State.Patrolling;
         }
     }
@@ -186,9 +191,9 @@ public class AIController : MonoBehaviour
         {
             
 
-            if (path.Count == 0)
+            if (path.Count == 0 || curr == path.Count)
             {
-                curr = 0;
+                curr = 0;                        
                 SearchPathToPlayer(player);
             }
 
@@ -274,6 +279,7 @@ public class AIController : MonoBehaviour
 
     private void SearchPath(GameObject wp)
     {
+       
         if (pathfinder.myPath.Count > 0)
             pathfinder.myPath.Clear();
 
@@ -294,6 +300,7 @@ public class AIController : MonoBehaviour
 
     private void SearchPathToPlayer(GameObject pl)
     {
+        
         if (pathfinder.myPath.Count > 0)
             pathfinder.myPath.Clear();
 
@@ -303,7 +310,8 @@ public class AIController : MonoBehaviour
             pathfinder.start = h.transform.gameObject.GetComponent<Tile>();
         }
 
-        pathfinder.end = pl.GetComponent<PlayerController>().currentTile;
+        //pathfinder.end = pl.GetComponent<PlayerController>().currentTile;
+        pathfinder.end = TileToMoveTo;
 
         pathfinder.Search();
 
