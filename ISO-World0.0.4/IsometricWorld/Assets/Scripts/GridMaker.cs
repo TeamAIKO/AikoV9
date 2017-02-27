@@ -195,90 +195,40 @@ public class GridMaker : MonoBehaviour
             }
         }
 
-        RaycastHit hit;
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, 100f))
+
+
+       
+        DoubleClick();
+
+
+
+        //not optimised! only for debugging
+        if (path.myPath != null)
         {
-            tileTr = hit.transform;
-
-            /*
-			if(Input.GetMouseButtonDown(0))
-			{
-//				SetStartAndFinalTiles(hit);
-
-				SearchPath(hit);
-
-			}
-            */
-
-            if (Input.GetMouseButtonDown(0))
+            foreach (Tile t in path.myPath)
             {
-                if (!oneClick) // first click no previous clicks
-                {
-                    oneClick = true;
-
-                    timeForDoubleClick = Time.time; // save the current time
-                                                    // do one click things;
-                }
-                else
-                {
-                    oneClick = false; // found a double click, now reset
-
-                    //do double click things
-
-                    SetStartAndFinalTiles(hit);
-
-                    SearchPath(hit);
-
-                    //confirming the path the enable the gameplay
-                    PlayerController.instance.pathConfirmed = true;
-                    Debug.Log("Confirmed Path");
-                }
-            }
-            if (oneClick)
-            {
-                // if the time now is delay seconds more than when the first click started. 
-                if ((Time.time - timeForDoubleClick) > delay)
-                {
-
-                    //basically if thats true its been too long and we want to reset so the next click is simply a single click and not a double click.
-
-                    oneClick = false;
-
-                }
-
-            }
-
-
-
-
-            //not optimised! only for debugging
-            if (path.myPath != null)
-            {
-                foreach (Tile t in path.myPath)
-                {
-                    ChangeTileColor(t.transform, Color.blue, 0.2f);
-                }
-            }
-
-            if (path.start != null)
-            {
-                ChangeTileColor(path.start.transform, Color.blue, 0.2f);
-            }
-
-
-            if (path.end != null)
-            {
-                ChangeTileColor(path.end.transform, Color.blue, 0.2f);
-            }
-
-            if (tileTr != null)
-            {
-                ChangeTileAlpha(tileTr, 0.5f);
+                ChangeTileColor(t.transform, Color.blue, 0.2f);
             }
         }
 
+        if (path.start != null)
+        {
+            ChangeTileColor(path.start.transform, Color.blue, 0.2f);
+        }
+
+
+        if (path.end != null)
+        {
+            ChangeTileColor(path.end.transform, Color.blue, 0.2f);
+        }
+
+        if (tileTr != null)
+        {
+            ChangeTileAlpha(tileTr, 0.5f);
+        }
     }
+
+
 
     private void SearchPath(RaycastHit hit)
     {
@@ -337,20 +287,59 @@ public class GridMaker : MonoBehaviour
         t.gameObject.GetComponent<MeshRenderer>().material.color = c;
     }
 
-    /*
-    public void MoveCountDown()
-    {       
-        MovesLeft = NumberOfMoves--;
-    }
 
-    void OnTriggerEnter(Collider other)
+    public void DoubleClick()
     {
-        if (other.gameObject.tag == "Player")
+        if (PlayerController.instance.pathConfirmed == true)
         {
-            MoveCountDown();
-            Debug.Log("-1");
+            return;
+
+        }
+        RaycastHit hit;
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit, 100f))
+        {
+            tileTr = hit.transform;
+
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (!oneClick) // first click no previous clicks
+                {
+                    oneClick = true;
+
+                    timeForDoubleClick = Time.time; // save the current time
+                                                    // do one click things;
+                }
+                else
+                {
+                    oneClick = false; // found a double click, now reset
+
+                    //do double click things
+
+                    SetStartAndFinalTiles(hit);
+
+                    SearchPath(hit);
+
+                    //confirming the path the enable the gameplay
+                    PlayerController.instance.pathConfirmed = true;
+                    Debug.Log("Confirmed Path");
+                }
+            }
+            if (oneClick)
+            {
+                // if the time now is delay seconds more than when the first click started. 
+                if ((Time.time - timeForDoubleClick) > delay)
+                {
+
+                    //basically if thats true its been too long and we want to reset so the next click is simply a single click and not a double click.
+
+                    oneClick = false;
+
+                }
+
+            }
         }
     }
-
-   */
 }
+

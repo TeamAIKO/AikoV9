@@ -74,7 +74,7 @@ public class TurnBased : MonoBehaviour
             //CREATE PLANNING - SET PATH CONFIRMED TO FALSE UNITLL BUTTON PRESS. WHEN CONFIRMED MOVE TO PLAYER TURN THEN CHANGE BOOL TO TRUE. TURN OFF ONCE CLOSE TO END NODE OR MOVES LEFT = 0
             //MAYBE TURN OFF RAYCASTING IN PLAYER TURN TO PREVENT CHEATING OF MOVES
             case (GameStates.Planning):
-
+                
                 ShowTilesInRange(5);
 
                 //Debug.Log("Planning");

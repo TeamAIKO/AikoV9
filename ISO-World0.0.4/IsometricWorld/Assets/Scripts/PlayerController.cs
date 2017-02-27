@@ -17,10 +17,7 @@ public class PlayerController : MonoBehaviour
     private TurnBased turn;
     public int tilesMoved = 0;
 
-    //variables for the double click 
-    private bool oneClick = false;
-    private bool timerIsRunning;
-    public float timeForDoubleClick;
+   
 
     //this is how long to allow for double click
     public float delay;
@@ -59,7 +56,7 @@ public class PlayerController : MonoBehaviour
         isRunning = true;
 
 
-        //if (!pathConfirmed || curr > path.Count - 1)
+        
         if (curr > path.Count - 1)
         {
 
