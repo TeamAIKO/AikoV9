@@ -64,7 +64,7 @@ public class GridMaker : MonoBehaviour
 
         SearchAdjacentTiles();
 
-        Debug.Log(tiles.Count);
+        //Debug.Log(tiles.Count);
 
         //MovesLeft = NumberOfMoves;
 
@@ -323,7 +323,7 @@ public class GridMaker : MonoBehaviour
 
                     //confirming the path the enable the gameplay
                     PlayerController.instance.pathConfirmed = true;
-                    Debug.Log("Confirmed Path");
+                    //Debug.Log("Confirmed Path");
                 }
             }
             if (oneClick)

@@ -23,6 +23,7 @@ GameObject:
   - 23: {fileID: 23000013251181936}
   - 114: {fileID: 114000013481078850}
   - 114: {fileID: 114000014141254464}
+  - 114: {fileID: 114000011388894990}
   m_Layer: 0
   m_Name: EnemyAI
   m_TagString: Enemy
@@ -68,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010876447524}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 23.5, y: 0.5, z: -39.5}
+  m_LocalPosition: {x: 35, y: 0.5, z: -51}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -159,6 +160,26 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114000011388894990
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010876447524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53e78e38d7288a24cbd09f2e03adc5d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewRadius: 8.21
+  viewAngle: 45
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 0
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 0
+  visibleTarget: {fileID: 0}
 --- !u!114 &114000013481078850
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -175,12 +196,27 @@ MonoBehaviour:
   - {fileID: 0}
   currWaypoint: 0
   currentState: 1
-  path: []
+  path:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   loopPath: 1
-  Moved: 0
-  enemyTilesMoved: 0
-  MovesToMake: 6
-  pathfinder: {fileID: 0}
+  Moved: 1
+  enemyTilesMoved: 3
+  MovesToMake: 3
+  TileToMoveTo: {fileID: 0}
+  ChaseDistance: 5.5
+  pathfinder: {fileID: 114000014141254464}
 --- !u!114 &114000014141254464
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -198,4 +234,17 @@ MonoBehaviour:
   end: {fileID: 0}
   openList: []
   closeList: []
-  myPath: []
+  myPath:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

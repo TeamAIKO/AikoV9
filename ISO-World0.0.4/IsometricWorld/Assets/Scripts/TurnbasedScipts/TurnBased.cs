@@ -142,11 +142,12 @@ public class TurnBased : MonoBehaviour
                     Number++;
                 }
 
-                for (int i = 0; i < Enemies.Length; i++)
+                Debug.Log(EnemyToMove.name);
+                //for (int i = 0; i < Enemies.Length; i++)
 
-                {
-                    Debug.Log(Enemies[i].name);
-                }
+                //{
+                //    //Debug.Log(Enemies[i].name);
+                //}
 
                 if (EnemyMovesMade >= EnemyMoves)
                 {
